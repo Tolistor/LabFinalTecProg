@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-section {
+            text-align: center;
+            color: white;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .card-custom {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            background: white;
+        }
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .btn-custom {
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        .feature-card {
+            padding: 2rem;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section mb-5">
+            <h1 class="hero-title">
+                <i class="bi bi-building"></i> Sistema de Gestión
+            </h1>
+            <p class="hero-subtitle">Bienvenido al sistema de gestión de clientes</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card card-custom feature-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-people-fill card-icon text-primary"></i>
+                        <h4 class="card-title mb-3">Gestión de Clientes</h4>
+                        <p class="card-text text-muted mb-4">Administre la información de sus clientes de manera eficiente</p>
+                        <a href="/cliente" class="btn btn-primary btn-custom w-100">
+                            <i class="bi bi-arrow-right-circle me-2"></i>Ir a Clientes
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card card-custom feature-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-plus-circle-fill card-icon text-success"></i>
+                        <h4 class="card-title mb-3">Agregar Cliente</h4>
+                        <p class="card-text text-muted mb-4">Registre nuevos clientes en el sistema rápidamente</p>
+                        <a href="/cliente/agregar" class="btn btn-success btn-custom w-100">
+                            <i class="bi bi-plus-circle me-2"></i>Agregar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card card-custom feature-card">
+                    <div class="card-body text-center">
+                        <i class="bi bi-info-circle-fill card-icon text-info"></i>
+                        <h4 class="card-title mb-3">Información</h4>
+                        <p class="card-text text-muted mb-4">Conozca más sobre las funcionalidades del sistema</p>
+                        <button class="btn btn-info btn-custom w-100" disabled>
+                            <i class="bi bi-question-circle me-2"></i>Próximamente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <p class="text-white opacity-75">
+                <i class="bi bi-code-slash me-2"></i>Desarrollado con Spring Boot y Bootstrap
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
