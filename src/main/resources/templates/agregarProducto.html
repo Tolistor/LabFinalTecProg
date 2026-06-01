@@ -82,7 +82,15 @@
                             <label for="categoria" class="form-label">
                                 <i class="bi bi-list-ul me-2"></i>Categoría
                             </label>
-                            <input type="text" class="form-control" id="categoria" name="categoria" required placeholder="Ingrese la categoría">
+                            <div class="input-group">
+                                <select class="form-control" id="categoria" name="categoria" required>
+                                    <option value="">Seleccione una categoría</option>
+                                    <option th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.nombre}"></option>
+                                </select>
+                                <a href="/categoria/agregar" class="btn btn-outline-warning" title="Agregar nueva categoría">
+                                    <i class="bi bi-plus-circle-fill"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="row">

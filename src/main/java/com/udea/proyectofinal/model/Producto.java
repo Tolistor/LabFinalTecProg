@@ -18,9 +18,10 @@ public class Producto {
     @Column(name = "precio", nullable = false)
     private int precio;
 
-    @NotBlank(message = "La categoría no puede estar vacio")
-    @Column(name = "categoria", nullable = false)
-    private String categoria;
+    @NotNull(message = "La categoría no puede estar vacio")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "categoria_id", nullable = false)
+    private Categoria categoria;
 
     @NotNull(message = "El stock no puede estar vacio")
     @Min(value = 0, message = "El stock debe ser positivo")
@@ -34,7 +35,7 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(long id, int precio, String categoria, int stock, String referencia) {
+    public Producto(long id, int precio, Categoria categoria, int stock, String referencia) {
         this.id = id;
         this.precio = precio;
         this.categoria = categoria;
@@ -58,11 +59,11 @@ public class Producto {
         this.precio = precio;
     }
 
-    public @NotBlank(message = "La categoría no puede estar vacio") String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(@NotBlank(message = "La categoría no puede estar vacio") String categoria) {
+    public void setCategoria(@NotNull(message = "La categoría no puede estar vacio") Categoria categoria) {
         this.categoria = categoria;
     }
 
