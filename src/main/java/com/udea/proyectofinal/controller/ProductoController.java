@@ -66,8 +66,13 @@ public class ProductoController {
     }
 
     @GetMapping("/producto/delete/{id}")
-    public String deleteCliente(@PathVariable Long id) {
-        productoService.deleteProducto(id);
+    public String deleteCliente(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            productoService.deleteProducto(id);
+            redirectAttributes.addFlashAttribute("mensaje", "Producto eliminado exitosamente");
+        } catch (RuntimeException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+        }
         return "redirect:/producto";
     }
 }
