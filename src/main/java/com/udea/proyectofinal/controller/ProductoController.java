@@ -1,7 +1,10 @@
 package com.udea.proyectofinal.controller;
 
+
 import com.udea.proyectofinal.model.Cliente;
+import com.udea.proyectofinal.model.Producto;
 import com.udea.proyectofinal.service.ClienteService;
+import com.udea.proyectofinal.service.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,34 +14,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class ClienteController {
+public class ProductoController {
 
     @Autowired
-    private ClienteService clienteService;
+    private ProductoService productoService;
 
     //ruta para ver todos los clientes
-    @GetMapping("/cliente")
-    public String cliente(Model model) {
-        model.addAttribute("clientes", clienteService.getAllClientes());
-        return "cliente";
+    @GetMapping("/producto")
+    public String producto(Model model) {
+        model.addAttribute("clientes", productoService.getAllProducto());
+        return "producto";
     }
-    // muestra en la ruta "agregar"
-    @GetMapping("/cliente/agregar")
+    // miestra en la ruta "agregar"
+    @GetMapping("/producto/agregar")
     public String mostrarFormularioAgregar() {
-        return "agregar";
+        return "agregarProducto";
     }
 
     // lelva la informacion (los atributos deben llamarse igual que los del objeto pa evitar problemas)
-    @PostMapping("/cliente/agregar")
-    public String agregarCliente(Cliente cliente) {
-        clienteService.saveCliente(cliente);
-        return "redirect:/cliente";
+    @PostMapping("/producto/agregar")
+    public String agregarProducto(Producto producto) {
+        productoService.saveProducto(producto);
+        return "redirect:/producto";
     }
 
-    // para borrar cliente
-    @GetMapping("/cliente/delete/{id}")
+    @GetMapping("/producto/delete/{id}")
     public String deleteCliente(@PathVariable Long id) {
-        clienteService.deleteCliente(id);
-        return "redirect:/cliente";
+        productoService.deleteProducto(id);
+        return "redirect:/producto";
     }
 }
