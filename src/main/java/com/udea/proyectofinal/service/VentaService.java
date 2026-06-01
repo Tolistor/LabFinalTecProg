@@ -21,13 +21,15 @@ public class VentaService {
         return ventaRepository.findAll();
     }
 
+    // aca guardo la venta
     public Venta saveVenta(Venta venta) {
         Producto producto = venta.getProducto();
         
         if (producto.getStock() < venta.getCantidad()) {
             throw new RuntimeException("Stock insuficiente. Stock disponible: " + producto.getStock());
         }
-        
+
+        //edito el stock
         producto.setStock(producto.getStock() - venta.getCantidad());
         productoRepository.save(producto);
         
@@ -46,5 +48,14 @@ public class VentaService {
             productoRepository.save(producto);
         }
         ventaRepository.deleteById(id);
+    }
+
+    // para cambiar estado de venta
+    public void updateEstado(Long id, String estado) {
+        Venta venta = getVentaById(id);
+        if (venta != null) {
+            venta.setEstado(estado);
+            ventaRepository.save(venta);
+        }
     }
 }

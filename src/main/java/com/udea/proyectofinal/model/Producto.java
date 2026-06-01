@@ -18,8 +18,11 @@ public class Producto {
     @Column(name = "precio", nullable = false)
     private int precio;
 
+    // muchos productos pueden pertenecer a una categoria
     @NotNull(message = "La categoría no puede estar vacio")
+    // relacion categoria
     @ManyToOne(fetch = FetchType.EAGER)
+    // relacion categoria (llave foranea)
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 

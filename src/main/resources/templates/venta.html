@@ -11,7 +11,7 @@
             background-color: #f8f9fa;
         }
         .header-section {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 2rem 0;
             margin-bottom: 2rem;
@@ -27,11 +27,11 @@
             overflow: hidden;
         }
         .table thead {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
         .btn-add {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
             padding: 10px 25px;
             border-radius: 25px;
@@ -39,11 +39,22 @@
         }
         .btn-add:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
         }
         .btn-delete {
             border-radius: 20px;
             padding: 5px 15px;
+        }
+        .form-select-sm {
+            border-radius: 8px;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #dee2e6;
+            transition: all 0.3s ease;
+        }
+        .form-select-sm:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
         }
     </style>
 </head>
@@ -80,6 +91,9 @@
                             <th>Cliente</th>
                             <th>Producto</th>
                             <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                            <th>Estado</th>
                             <th>Fecha</th>
                             <th>Acciones</th>
                         </tr>
@@ -90,6 +104,17 @@
                             <td th:text="${venta.cliente != null ? venta.cliente.nombre : 'N/A'}"></td>
                             <td th:text="${venta.producto != null ? venta.producto.referencia : 'N/A'}"></td>
                             <td th:text="${venta.cantidad}"></td>
+                            <td th:text="'$' + ${venta.precioUnitario}"></td>
+                            <td th:text="'$' + ${venta.total}"></td>
+                            <td>
+                                <form th:action="@{/venta/update-estado/{id}(id=${venta.id})}" method="post" style="display: inline;">
+                                    <select class="form-select form-select-sm" name="estado" onchange="this.form.submit()" style="width: 120px;">
+                                        <option value="Pendiente" th:selected="${venta.estado == 'Pendiente'}">Pendiente</option>
+                                        <option value="Pagado" th:selected="${venta.estado == 'Pagado'}">Pagado</option>
+                                        <option value="Entregado" th:selected="${venta.estado == 'Entregado'}">Entregado</option>
+                                    </select>
+                                </form>
+                            </td>
                             <td th:text="${#temporals.format(venta.fecha, 'dd/MM/yyyy HH:mm')}"></td>
                             <td>
                                 <a th:href="@{/venta/delete/{id}(id=${venta.id})}" class="btn btn-danger btn-sm btn-delete">
@@ -98,7 +123,7 @@
                             </td>
                         </tr>
                         <tr th:if="${#lists.isEmpty(ventas)}">
-                            <td colspan="6" class="text-center text-muted py-4">
+                            <td colspan="9" class="text-center text-muted py-4">
                                 <i class="bi bi-inbox fs-1 d-block mb-2"></i>
                                 No hay ventas registradas
                             </td>

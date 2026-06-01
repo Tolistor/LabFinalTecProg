@@ -40,13 +40,18 @@ public class VentaController {
         return "agregarVenta";
     }
 
+    // RequestParam = lo uso para atrapar lo que le ingresamos en los campos y mandarlo en el objeto
     @PostMapping("/venta/agregar")
-    public String agregarVenta(@RequestParam Long producto, @RequestParam Long cliente, @RequestParam int cantidad, RedirectAttributes redirectAttributes) {
+    public String agregarVenta(@RequestParam Long producto, @RequestParam Long cliente, @RequestParam int cantidad, @RequestParam String estado, RedirectAttributes redirectAttributes) {
         try {
+            Producto productoObj = productoService.getProductoById(producto);
             Venta venta = new Venta();
-            venta.setProducto(productoService.getProductoById(producto));
+            venta.setProducto(productoObj);
             venta.setCliente(clienteService.getClienteById(cliente));
             venta.setCantidad(cantidad);
+            venta.setEstado(estado);
+            venta.setPrecioUnitario(productoObj.getPrecio());
+            venta.setTotal(productoObj.getPrecio() * cantidad);
             ventaService.saveVenta(venta);
             redirectAttributes.addFlashAttribute("mensaje", "Venta realizada exitosamente");
             return "redirect:/venta";
@@ -59,6 +64,12 @@ public class VentaController {
     @GetMapping("/venta/delete/{id}")
     public String deleteVenta(@PathVariable Long id) {
         ventaService.deleteVenta(id);
+        return "redirect:/venta";
+    }
+
+    @PostMapping("/venta/update-estado/{id}")
+    public String updateEstado(@PathVariable Long id, @RequestParam String estado) {
+        ventaService.updateEstado(id, estado);
         return "redirect:/venta";
     }
 }
