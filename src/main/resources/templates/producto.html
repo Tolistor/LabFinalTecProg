@@ -93,7 +93,15 @@
                             <td th:text="${producto.referencia}"></td>
                             <td th:text="${producto.categoria != null ? producto.categoria.nombre : 'Sin categoría'}"></td>
                             <td th:text="${producto.precio}"></td>
-                            <td th:text="${producto.stock}"></td>
+                            <td>
+                                <form th:action="@{/producto/editar-stock}" method="post" class="d-flex gap-1">
+                                    <input type="hidden" name="id" th:value="${producto.id}">
+                                    <input type="number" name="stock" th:value="${producto.stock}" min="0" class="form-control form-control-sm" style="width: 80px;">
+                                    <button type="submit" class="btn btn-success btn-sm">
+                                        <i class="bi bi-check-lg"></i>
+                                    </button>
+                                </form>
+                            </td>
                             <td>
                                 <a th:href="@{/producto/delete/{id}(id=${producto.id})}" class="btn btn-danger btn-sm btn-delete">
                                     <i class="bi bi-trash-fill"></i> Eliminar

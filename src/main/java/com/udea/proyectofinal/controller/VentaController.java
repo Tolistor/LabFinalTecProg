@@ -67,6 +67,7 @@ public class VentaController {
         return "redirect:/venta";
     }
 
+    // ruta para editar estado de venta (pagado despachado pendiente)
     @PostMapping("/venta/update-estado/{id}")
     public String updateEstado(@PathVariable Long id, @RequestParam String estado) {
         ventaService.updateEstado(id, estado);

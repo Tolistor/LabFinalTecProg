@@ -75,4 +75,22 @@ public class ProductoController {
         }
         return "redirect:/producto";
     }
+
+    // ruta para editar stock de producto ya creado
+    @PostMapping("/producto/editar-stock")
+    public String editarStock(@RequestParam Long id, @RequestParam int stock, RedirectAttributes redirectAttributes) {
+        try {
+            Producto producto = productoService.getProductoById(id);
+            if (producto == null) {
+                redirectAttributes.addFlashAttribute("error", "Producto no encontrado");
+                return "redirect:/producto";
+            }
+            producto.setStock(stock);
+            productoService.saveProducto(producto);
+            redirectAttributes.addFlashAttribute("mensaje", "Stock actualizado exitosamente");
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Error al actualizar stock: " + e.getMessage());
+        }
+        return "redirect:/producto";
+    }
 }
